@@ -1,62 +1,62 @@
 export const docCards = [
     {
     id: "120",
-    name: "aixh",
-    title: "uwgcys",
+    name: "Dr. A",
+    title: "specialist",
     Department: {
         id: "1",
         name: "cardiovacular",
         detailURL: "string",
     },
-    thumbnailURL: "jxbka",
+    thumbnailURL: "https://avatar.iran.liara.run/public/21",
     profileURL: "jkaxhs"
     },
     {
         id: "121",
-        name: "bahjs",
-        title: "uwgcys",
+        name: "Dr. B",
+        title: "specialist",
         Department: {
             id: "1",
             name: "cardiovacular",
             detailURL: "string",
         },
-        thumbnailURL: "jxbka",
+        thumbnailURL: "https://avatar.iran.liara.run/public/37",
         profileURL: "jkaxhs"
     },
     {
         id: "123",
-        name: "chiduu",
-        title: "uwgcys",
+        name: "Dr. C",
+        title: "specialist",
         Department: {
             id: "2",
             name: "respiratory",
             detailURL: "string",
         },
-        thumbnailURL: "jxbka",
+        thumbnailURL: "https://avatar.iran.liara.run/public/93",
         profileURL: "jkaxhs"
     },
     {
         id: "124",
-        name: "dhods",
-        title: "uwgcys",
+        name: "Dr. D",
+        title: "specialist",
         Department: {
             id: "2",
             name: "respiratory",
             detailURL: "string",
         },
-        thumbnailURL: "jxbka",
+        thumbnailURL: "https://avatar.iran.liara.run/public/53",
         profileURL: "jkaxhs"
     },
     {
         id: "125",
-        name: "edgyu",
-        title: "uwgcys",
+        name: "Dr. E",
+        title: "specialist",
         Department: {
             id: "2",
-            name: "respiratory",
+            name: "neural",
             detailURL: "string",
         },
-        thumbnailURL: "jxbka",
+        thumbnailURL: "https://avatar.iran.liara.run/public/45",
         profileURL: "jkaxhs"
     },
 

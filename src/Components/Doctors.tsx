@@ -1,6 +1,5 @@
 import { Card, CardBody, CardFooter, CardHeader, Button, Heading, Image, SimpleGrid, chakra, ChakraProvider, HStack} from '@chakra-ui/react'
 // import {  ButtonGroup, Container, Divider,  Stack, Text, Box } from '@chakra-ui/react'
-import { docCards } from '../data/Doctors'
 import './layout.css'
 import theme from '../Styles/rootTheme'
 
@@ -17,9 +16,13 @@ type Doctors = {
     profileURL: string
 }
 
+// function Reserve(){
+//     return()
+// }
+
 export default function 
-Doct() {
-    const listItems = docCards.map(doct =>
+Doct({docList}:{docList:Doctors[]}) {
+    const listItems = docList.map(doct =>
     <ChakraProvider theme={theme}>
         <Card key={doct.id} border='2px' borderColor='blue' >
         <CardHeader>
@@ -30,12 +33,14 @@ Doct() {
 
             <p>
             <b>{doct.title}</b>
-            {'Department:'+ doct.Department+' '}
+            <p>
+                {'Department:'+ doct.Department.name}
+            </p>
             </p>
         </CardBody>
         <CardFooter>
-            <Button m={1} p={1}>on {doct.name}</Button>
-            <Button m={1}>Reserve</Button>
+            <Button m={2} p={1} colorScheme='gray'>on {doct.name}</Button>
+            <Button m={2} colorScheme='twitter' >Reserve</Button>
             
         </CardFooter>
     </Card>

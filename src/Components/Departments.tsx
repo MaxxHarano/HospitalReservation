@@ -1,6 +1,7 @@
 // import { Image, Button, ButtonGroup,  Divider, Heading, Stack, Text,  } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Container, Box, ChakraProvider, theme, SimpleGrid, GridItem } from '@chakra-ui/react'
 import { docCards } from '../data/Doctors'
+import { DepInfo } from '../data/Departments';
 import Doctors from './Doctors';
 
 export default function Departments() {
@@ -27,30 +28,41 @@ export default function Departments() {
 
 function TabComponent(){
 
-    // const doct1 = docCards.filter(checkDept)
+    const basicDoct = [{
+        id: "01",
+        name: "Basic Doctor",
+        title: "basic",
+        Department: {
+            id: "1",
+            name: "cardiovacular",
+            detailURL: "string",
+        },
+        thumbnailURL: "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
+        profileURL: "jkaxhs"
+    }]
 
-    // function checkDept(Doctors){
-    //     return Doctors.Department.id == 1;
-    // }
+    const departmentTabs = DepInfo.map(dep =>
+        <Tab m={2}>{dep.name}</Tab>
+    )
 
+    const departmentPanels = DepInfo.map(dep =>
+        <TabPanel>
+            <h5>{dep.name}</h5>
+            <Doctors docList={basicDoct}/>
+        </TabPanel>
+    )
     return (
         <Tabs variant='soft-rounded' colorScheme='blue'>
             <TabList>
-                <Tab>cardiovacular</Tab>
-                <Tab>respiratory</Tab>
-                <Tab>neural</Tab>
+                <Tab m={2}>Specialists </Tab>
+                {departmentTabs}
             </TabList>
 
             <TabPanels>
                 <TabPanel>
-                    <Doctors/>
+                    <Doctors docList={docCards}/>
                 </TabPanel>
-                <TabPanel>
-                    <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                    <p>three!</p>
-                </TabPanel>
+                {departmentPanels}
             </TabPanels>
         </Tabs>
     )

@@ -1,17 +1,11 @@
 import { Box, HStack, useRadio, useRadioGroup } from '@chakra-ui/react'
-import React from 'react'
-import { render } from 'react-dom'
 
-function TimeRange() {
-  return (
-    <div>TimeRange</div>
-  )
-}
+// import React from 'react'
+// import { render } from 'react-dom'
 
-export default TimeRange
 
 // 1. Create a component that consumes the `useRadio` hook
-function RadioCard(props) {
+function RadioCard(props:unknown[]) {
     const { getInputProps, getRadioProps } = useRadio(props)
   
     const input = getInputProps()
@@ -44,7 +38,7 @@ function RadioCard(props) {
   }
   
   // Step 2: Use the `useRadioGroup` hook to control a group of custom radios.
-  function Example() {
+  export default function TimeRange() {
     const options = ['react', 'vue', 'svelte']
   
     const { getRootProps, getRadioProps } = useRadioGroup({
@@ -68,5 +62,3 @@ function RadioCard(props) {
       </HStack>
     )
   }
-  
-  render(<Example />)
