@@ -1,7 +1,10 @@
-import { Card, CardBody, CardFooter, CardHeader, Button, Heading, Image, SimpleGrid, chakra, ChakraProvider, HStack} from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, CardHeader, Button, Heading, Image, SimpleGrid, ChakraProvider, useConst} from '@chakra-ui/react'
 // import {  ButtonGroup, Container, Divider,  Stack, Text, Box } from '@chakra-ui/react'
+import { reserveContext } from './reserveContext'
+import TimeRange from './TimeRange'
 import './layout.css'
 import theme from '../Styles/rootTheme'
+import { useContext, useRef, useState } from 'react'
 
 type Doctors = {
     id: string
@@ -16,12 +19,18 @@ type Doctors = {
     profileURL: string
 }
 
-// function Reserve(){
-//     return()
-// }
+
+export interface reserveObject {
+    id: string;
+    department: string;
+    doctor: string;
+    timeRange: string;
+  }
 
 export default function 
 Doct({docList}:{docList:Doctors[]}) {
+    const [showTime, setShowTime]=useState(false);
+    //let docName = useRef<string>('default');
     const listItems = docList.map(doct =>
     <ChakraProvider theme={theme}>
         <Card key={doct.id} border='2px' borderColor='blue' >
@@ -40,7 +49,7 @@ Doct({docList}:{docList:Doctors[]}) {
         </CardBody>
         <CardFooter>
             <Button m={2} p={1} colorScheme='gray'>on {doct.name}</Button>
-            <Button m={2} colorScheme='twitter' >Reserve</Button>
+            <Button onClick={()=>{setShowTime(!showTime)}} m={2} >Reserve</Button>
             
         </CardFooter>
     </Card>
@@ -48,9 +57,14 @@ Doct({docList}:{docList:Doctors[]}) {
     
     )
 
+    const reservation = useContext<reserveObject>(reserveContext)
+
   return (
-    <SimpleGrid spacing={2} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-        {listItems}
-    </SimpleGrid>  
+    <reserveContext.Provider value={reservation}>
+        <SimpleGrid spacing={2} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+            {listItems}
+        </SimpleGrid>  
+        {showTime && <TimeRange/>} 
+    </reserveContext.Provider>
   )
 }

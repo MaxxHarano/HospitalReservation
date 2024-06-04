@@ -7,13 +7,15 @@ import Contents from './Components/Contents'
 import Home from './Pages/Home'
 import Profile from './Pages/Profile'
 import { Login } from './Pages/Login/Login'
-
+// import { Redirect } from 'react-router-dom'
+// <Redirect from = "/reserve" to index/>
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Contents/>}/>
+      
       <Route path='login' element={<Login/>}/>
       <Route path='Home' element={<Home/>}/>
       <Route path='Profile' element={<Profile/>}/>
