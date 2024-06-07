@@ -1,10 +1,10 @@
-import { Card, CardBody, CardFooter, CardHeader, Button, Heading, Image, SimpleGrid, ChakraProvider, useConst} from '@chakra-ui/react'
-// import {  ButtonGroup, Container, Divider,  Stack, Text, Box } from '@chakra-ui/react'
+import { Card, CardBody, CardFooter, CardHeader, Button, Heading, Image, SimpleGrid, ChakraProvider, } from '@chakra-ui/react'
 import { reserveContext } from './reserveContext'
 import TimeRange from './TimeRange'
 import './layout.css'
 import theme from '../Styles/rootTheme'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
+// import {  ButtonGroup, Container, Divider,  Stack, Text, Box } from '@chakra-ui/react'
 
 type Doctors = {
     id: string

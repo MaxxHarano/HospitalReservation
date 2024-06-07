@@ -10,9 +10,12 @@ const baseStyle = definePartsStyle({
   // define the part you're going to style
   tab: {
     fontWeight: 'semibold', // change the font weight
+    p: '10px',
+    m: '5px',
   },
   tabpanel: {
     fontFamily: 'mono', // change the font family
+    p: '10px',
   },
 })
 const sizes = {
@@ -65,11 +68,11 @@ const variants = {
   colorful: colorfulVariant,
 };
 
-const defaultProps = {
-  size: 'xl',
-  variant: 'colorful',
-  colorScheme: 'green',
-};
+// const defaultProps = {
+//   size: 'xl',
+//   variant: 'colorful',
+//   colorScheme: 'green',
+// };
 
 // export the component theme
-export const tabsTheme = defineMultiStyleConfig({ baseStyle, variants, sizes, defaultProps,});
+export const tabsTheme = defineMultiStyleConfig({ baseStyle, variants, sizes, });

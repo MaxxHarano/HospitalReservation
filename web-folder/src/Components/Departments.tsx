@@ -1,5 +1,5 @@
 // import { Image, Button, ButtonGroup,  Divider, Heading, Stack, Text,  } from '@chakra-ui/react'
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Container, Box, ChakraProvider, theme, SimpleGrid, GridItem } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, ChakraProvider, theme, SimpleGrid, GridItem } from '@chakra-ui/react'
 import { docCards } from '../data/Doctors'
 import { DepInfo } from '../data/Departments';
 import Doctors from './Doctors';

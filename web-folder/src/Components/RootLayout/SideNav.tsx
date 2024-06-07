@@ -1,13 +1,8 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import { Link } from 'react-router-dom';
-
-import { Avatar, Heading, Divider, Text, Flex, IconButton, Icon } from "@chakra-ui/react"
+import { Avatar, Heading, Divider, Text, Flex, IconButton } from "@chakra-ui/react"
 import { useState } from "react";
-import { CircleUser, Home, Info } from "lucide-react";
+import { CircleUser, Home, Info, BookOpenCheck } from "lucide-react";
 import NavItem from "./NavItem";
-import './avt.png'
-import { AddIcon, CheckIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 
 const SideNav = () => {
   const [navSize, changeNavSize] = useState("large")
@@ -41,7 +36,7 @@ const SideNav = () => {
               changeNavSize("small");
           } } aria-label={""} />
         <NavItem navSize={navSize} icon={Home} title="Home" />
-        <NavItem navSize={navSize} icon={CheckIcon} title="Reserve" active/>
+        <NavItem navSize={navSize} icon={BookOpenCheck} title="Reserve" active/>
         <NavItem navSize={navSize} icon={CircleUser} title="Profile" />
         <NavItem navSize={navSize} icon={Info} title="About" />
       </Flex>
