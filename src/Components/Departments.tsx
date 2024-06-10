@@ -31,7 +31,7 @@ function TabComponent(){
             name: "cardiovacular",
             detailURL: "string",
         },
-        thumbnailURL: "https://static.vecteezy.com/system/resources/thumbnails/003/337/584/small/default-avatar-photo-placeholder-profile-icon-vector.jpg",
+        thumbnailURL: "https://avatar.iran.liara.run/public/job/doctor/female",
         profileURL: "jkaxhs"
     }]
 

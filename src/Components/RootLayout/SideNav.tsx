@@ -43,6 +43,7 @@ const SideNav = () => {
           } } aria-label={""} />
         <NavItem navSize={navSize} icon={Home} title="Home" />
         <NavItem navSize={navSize} icon={CheckIcon} title="Reserve" active/>
+        <NavItem navSize={navSize} icon={Info} title="Records" />
         <NavItem navSize={navSize} icon={CircleUser} title="Profile" />
         <NavItem navSize={navSize} icon={Info} title="About" />
       </Flex>
