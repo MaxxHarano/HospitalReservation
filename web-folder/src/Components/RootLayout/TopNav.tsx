@@ -1,4 +1,4 @@
-import { Flex, Heading, Spacer, Button, ButtonGroup } from '@chakra-ui/react'
+import { Flex, HStack, Heading, Spacer, Button, ButtonGroup } from '@chakra-ui/react'
 import {Bell, Box, Settings, User } from "lucide-react"
 import { Link } from 'react-router-dom'
 

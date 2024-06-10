@@ -1,5 +1,5 @@
 // import { useState } from 'react'
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import RootLayout from './Pages/rootLayout'
 // import Doct from './Components/Doctors'
 import About from './Pages/About'
@@ -7,6 +7,7 @@ import Contents from './Components/Contents'
 import Home from './Pages/Home'
 import Profile from './Pages/Profile'
 import { Login } from './Pages/Login/Login'
+import Records from './Components/Records'
 // import { Redirect } from 'react-router-dom'
 // <Redirect from = "/reserve" to index/>
 
@@ -15,9 +16,10 @@ const router = createBrowserRouter(
     
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Contents/>}/>
-      
+      <Route path="/Reserve"element={<Navigate replace to="/" />} />
       <Route path='login' element={<Login/>}/>
       <Route path='Home' element={<Home/>}/>
+      <Route path='Records' element={<Records/>}/>
       <Route path='Profile' element={<Profile/>}/>
       <Route path='About' element={<About/>}/>
         <Route path='faq'/>

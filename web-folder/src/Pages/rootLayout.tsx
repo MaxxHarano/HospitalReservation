@@ -23,7 +23,7 @@ RootLayout() {
           p={4}
         >
           <TopNav/>
-          <Outlet/>
+          <Outlet p="20px"/>
         </GridItem>
         
     </Grid>

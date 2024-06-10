@@ -1,8 +1,8 @@
 import { Container, Heading, Text } from '@chakra-ui/react'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import Doct from './Doctors'
 import Departments from './Departments'
-// import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-// import Doct from './Doctors'
-// import ErrorPage from '../Pages/Error-Page'
+import ErrorPage from '../Pages/Error-Page'
 
 export default function Contents () {
   return (

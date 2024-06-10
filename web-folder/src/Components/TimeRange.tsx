@@ -1,7 +1,8 @@
 import { Box, Button, Container, Divider, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Tag, useRadio, useRadioGroup } from '@chakra-ui/react'
-import { useContext } from 'react'
-import { reserveObject } from './Doctors'
-import { reserveContext } from './reserveContext'
+import { useContext, useState } from 'react'
+import { ReserveContext, reserveObject } from './reserveContext.ts'
+import axios from 'axios'
+// import { json } from 'react-router-dom'
 // import { ChangeEvent, ReactNode } from 'react';
 
 // 1. Create a component that consumes the `useRadio` hook
@@ -40,18 +41,20 @@ function RadioCard(props) {
 // Step 2: Use the `useRadioGroup` hook to control a group of custom radios.
 export default function TimeRange() {
   const options = ['9:00', '10:00', '13:00', '14:00', '15:00']
-
+  const reservation = useContext(ReserveContext);
+  const [time, setTime] = useState('13:00')
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'framework',
     defaultValue: 'react',
-    onChange: console.log,
+    onChange: setTime,
   })
 
   const group = getRootProps()
 
+
   return (
-    <Container p={8}>
-      <Tag size={'lg'} colorScheme={'cyan'}> Choose time range you'd like to reserve:</Tag>
+    <Container p={10} m={5}>
+      <Tag size={'lg'} colorScheme={'twitter'}> Choose time range you'd like to reserve:</Tag>
       <Divider/>
       <HStack {...group}>
         {options.map((value) => {
@@ -63,13 +66,14 @@ export default function TimeRange() {
         )
       })}
       </HStack>
-      <SubmitPopover/>
+      <SubmitPopover reserveObj={reservation}/>
     </Container>
   )
+
+  reservation.timeRange = time;
 }
 
-function SubmitPopover(){
-  const reservation = useContext<reserveObject>(reserveContext)
+function SubmitPopover(reserveObj){
 
   return(
     <Popover>
@@ -82,7 +86,7 @@ function SubmitPopover(){
       <PopoverHeader>Confirmation!</PopoverHeader>
       <PopoverBody>
         <p>Are you ready to make the reservation?</p>
-        <Button onClick={()=>makeReservation(reservation)}>Submit</Button>
+        <Button onClick={()=>makeReservation(reserveObj)}>Submit</Button>
       </PopoverBody>
     </PopoverContent>
   </Popover>
@@ -90,17 +94,31 @@ function SubmitPopover(){
 }
 
 function makeReservation(obj){
-  const reserveObj = {
+  const reserveObj:reserveObject = {
+    id: "string",
     department: "string",
     doctor: "string",
     timeRange: "string",
   };
-  
+
+  reserveObj.id = obj.id;
   reserveObj.department = obj.department;
   reserveObj.doctor = obj.doctor;
   reserveObj.timeRange = obj.timeRange;
 
 
   const Record = (JSON.stringify(reserveObj));
-  console.log(Record);
+
+  axios.post('/api/rpc', {
+    "jsonrpc": '2.0',
+    "method": 'xxx',
+    "id": 7474,
+    "params": Record,
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
