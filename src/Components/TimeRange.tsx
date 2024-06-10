@@ -2,6 +2,7 @@ import { Box, Button, Container, Divider, HStack, Popover, PopoverArrow, Popover
 import { useContext, useState } from 'react'
 import { ReserveContext, reserveObject } from './reserveContext.ts'
 import axios from 'axios'
+// import { json } from 'react-router-dom'
 // import { ChangeEvent, ReactNode } from 'react';
 
 // 1. Create a component that consumes the `useRadio` hook
@@ -108,7 +109,12 @@ function makeReservation(obj){
 
   const Record = (JSON.stringify(reserveObj));
 
-  axios.post('/api/rpc', Record)
+  axios.post('/api/rpc', {
+    "jsonrpc": '2.0',
+    "method": 'xxx',
+    "id": 7474,
+    "params": Record,
+  })
   .then(function (response) {
     console.log(response);
   })
