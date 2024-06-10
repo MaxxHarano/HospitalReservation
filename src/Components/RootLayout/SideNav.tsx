@@ -15,6 +15,7 @@ const SideNav = () => {
     <Flex
       pos="sticky"
       left="5"
+      top={"2"}
       h="100vh"
       marginRight="2.5vh"
       boxShadow="0 0 12px 0 gray"
@@ -70,9 +71,4 @@ const SideNav = () => {
   
 };
 
-// <Link to='/departments'>Home</Link>
-
-// <Link to='/doctors'>Login</Link>
-
-// <Link to='/time'>Bill</Link>
 export default SideNav

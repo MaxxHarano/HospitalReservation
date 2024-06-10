@@ -1,0 +1,11 @@
+/Users/yuanye/demo1/target/debug/deps/libeither-622ba0cf5284853e.rmeta: /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/lib.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged_optional.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/iterator.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/into_either.rs
+
+/Users/yuanye/demo1/target/debug/deps/libeither-622ba0cf5284853e.rlib: /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/lib.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged_optional.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/iterator.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/into_either.rs
+
+/Users/yuanye/demo1/target/debug/deps/either-622ba0cf5284853e.d: /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/lib.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged_optional.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/iterator.rs /Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/into_either.rs
+
+/Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/lib.rs:
+/Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged.rs:
+/Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/serde_untagged_optional.rs:
+/Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/iterator.rs:
+/Users/yuanye/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.12.0/src/into_either.rs:

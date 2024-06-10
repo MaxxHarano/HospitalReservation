@@ -5,11 +5,6 @@ import { DepInfo } from '../data/Departments';
 import Doctors from './Doctors';
 
 export default function Departments() {
-    // const depStyles = {
-    //     p: '15px',
-    //     bg: "gray100",
-    //     m: "5px",
-    // }
 
   return (
     <ChakraProvider theme={theme}>
@@ -31,7 +26,6 @@ function TabComponent(){
     const basicDoct = [{
         id: "01",
         name: "Basic Doctor",
-        title: "basic",
         Department: {
             id: "1",
             name: "cardiovacular",
@@ -42,11 +36,13 @@ function TabComponent(){
     }]
 
     const departmentTabs = DepInfo.map(dep =>
-        <Tab m={2}>{dep.name}</Tab>
+        <Tab m={2} key={dep.id}>
+            {dep.name}
+        </Tab>
     )
 
     const departmentPanels = DepInfo.map(dep =>
-        <TabPanel>
+        <TabPanel key={dep.id}>
             <h5>{dep.name}</h5>
             <Doctors docList={basicDoct}/>
         </TabPanel>

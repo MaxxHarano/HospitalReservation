@@ -1,5 +1,5 @@
 // import { useState } from 'react'
-import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import { Navigate, Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import RootLayout from './Pages/rootLayout'
 // import Doct from './Components/Doctors'
 import About from './Pages/About'
@@ -15,7 +15,7 @@ const router = createBrowserRouter(
     
     <Route path='/' element={<RootLayout/>}>
       <Route index element={<Contents/>}/>
-      
+      <Route path="/Reserve"element={<Navigate replace to="/" />} />
       <Route path='login' element={<Login/>}/>
       <Route path='Home' element={<Home/>}/>
       <Route path='Profile' element={<Profile/>}/>

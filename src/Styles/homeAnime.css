@@ -2,7 +2,6 @@ html{
     background: rgb(118, 124, 208);
     height: 100%;
     position: relative;
-    overflow: hidden;
   }
   
   .container{

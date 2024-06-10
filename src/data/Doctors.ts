@@ -2,7 +2,6 @@ export const docCards = [
     {
     id: "120",
     name: "Dr. A",
-    title: "specialist",
     Department: {
         id: "1",
         name: "cardiovacular",
@@ -14,7 +13,6 @@ export const docCards = [
     {
         id: "121",
         name: "Dr. B",
-        title: "specialist",
         Department: {
             id: "1",
             name: "cardiovacular",
@@ -26,7 +24,6 @@ export const docCards = [
     {
         id: "123",
         name: "Dr. C",
-        title: "specialist",
         Department: {
             id: "2",
             name: "respiratory",
@@ -38,7 +35,6 @@ export const docCards = [
     {
         id: "124",
         name: "Dr. D",
-        title: "specialist",
         Department: {
             id: "2",
             name: "respiratory",
@@ -50,7 +46,6 @@ export const docCards = [
     {
         id: "125",
         name: "Dr. E",
-        title: "specialist",
         Department: {
             id: "2",
             name: "neural",
