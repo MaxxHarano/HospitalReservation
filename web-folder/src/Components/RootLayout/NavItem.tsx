@@ -40,8 +40,5 @@ function NavItem({navSize, title, icon, active}: navProps) {
             </Flex>
         )
     }
-    // <MenuList>
-    //     <NavHoverBox></NavHoverBox>
-    // </MenuList>
     
 export default NavItem
