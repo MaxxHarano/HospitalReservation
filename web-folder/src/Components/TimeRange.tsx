@@ -1,5 +1,5 @@
 import { Box, Button, Container, Divider, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Tag, useRadio, useRadioGroup } from '@chakra-ui/react'
-import { useContext, useState } from 'react'
+import { useContext, useId, useState } from 'react'
 import { ReserveContext, reserveObject } from './reserveContext.ts'
 import axios from 'axios'
 // import { json } from 'react-router-dom'
@@ -50,7 +50,7 @@ export default function TimeRange() {
   })
 
   const group = getRootProps()
-
+  reservation.id = useId();
 
   return (
     <Container p={10} m={5}>
@@ -73,7 +73,7 @@ export default function TimeRange() {
   reservation.timeRange = time;
 }
 
-function SubmitPopover(reserveObj){
+const SubmitPopover= ({reserveObj}:{reserveObj:reserveObject})=>{
 
   return(
     <Popover>
@@ -93,7 +93,7 @@ function SubmitPopover(reserveObj){
   )
 }
 
-function makeReservation(obj){
+function makeReservation(obj:reserveObject){
   const reserveObj:reserveObject = {
     id: "string",
     department: "string",
@@ -109,9 +109,9 @@ function makeReservation(obj){
 
   const Record = (JSON.stringify(reserveObj));
 
-  axios.post('/api/rpc', {
+  axios.post('http://localhost:8080/api/rpc', {
     "jsonrpc": '2.0',
-    "method": 'xxx',
+    "method": 'create_reservation',
     "id": 7474,
     "params": Record,
   })

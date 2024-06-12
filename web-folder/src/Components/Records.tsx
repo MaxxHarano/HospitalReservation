@@ -11,42 +11,51 @@ import {
 // import axios from 'axios'
 import {reserveObject} from './reserveContext.ts'
 import { SearchIcon } from '@chakra-ui/icons'
+import { useEffect, useState } from 'react'
+import api from '../api/records'
+
+
   
 export default function Records() {
 
-    const records:reserveObject[] = [{
-        id: '12345',
-        department: "default",
-        doctor: "basic",
-        timeRange: "13:00",
-    },
-    {
-        id: '12345',
-        department: "default",
-        doctor: "basic",
-        timeRange: "13:00",
-    } 
- ]
-    // axios({
-    //     method: 'get',
-    //     url: 'http://bit.ly/2mTM3nY',
-    //     responseType: 'stream'
-    //   })
-    //     .then(function (response) {
-    //       response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-    //     });
+    const [records, setRecords] = useState<reserveObject[]>([])
+    
+    useEffect(() => {
+      const fetchPosts = async () => {
+        try {
+          const response = await api.get('/api/rpc');
+          setRecords(response.data);
+        } catch (err) {
+          if (err.response) {
+            // Not in the 200 response range 
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+          } else {
+            console.log(`Error: ${err.message}`);
+          }
+        }
+      }
+      fetchPosts();
+    }, [])
+
     const recordItems = records.map(record =>
     <AccordionItem key={record.id}>
         <h2>
         <AccordionButton>
             <Box as='span' flex='1' textAlign='left'>
-            Reservation Record {record.id}
+            Reservation at {record.department}
+            
             </Box>
             <AccordionIcon />
         </AccordionButton>
         </h2>
         <AccordionPanel pb={4}>
-        Lorem ipsum 
+        Record ID: {record.id}
+        <br/>
+        Reservation with {record.doctor},
+        <br/>
+        at {record.timeRange}
         </AccordionPanel>
   </AccordionItem>
     )

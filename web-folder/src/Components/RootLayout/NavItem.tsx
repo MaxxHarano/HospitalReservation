@@ -1,12 +1,11 @@
-import { ComponentWithAs, Flex, Icon, IconProps,  Menu, MenuButton, Text, textDecoration } from '@chakra-ui/react'
+import { Flex, Icon,  Menu, MenuButton, Text } from '@chakra-ui/react'
+import { LucideIcon } from 'lucide-react';
 import { Link } from "react-router-dom";
-
-// import React, { ReactElement } from 'react'
 
 type navProps = {
     navSize: string;
     title: string;
-    icon: ComponentWithAs<"svg", IconProps>;
+    icon: LucideIcon;
     active?: boolean;
 }
 
@@ -22,7 +21,6 @@ function NavItem({navSize, title, icon, active}: navProps) {
             <Link
                 to={title}
                 
-                w={navSize == "small"? "0px":"20vh"}
             >
                 <MenuButton p={4}>
                     <Flex

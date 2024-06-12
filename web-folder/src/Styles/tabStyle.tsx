@@ -72,4 +72,4 @@ const defaultProps = {
 };
 
 // export the component theme
-export const tabsTheme = defineMultiStyleConfig({ baseStyle, variants, sizes, defaultProps,});
+export const tabsTheme = defineMultiStyleConfig({ baseStyle, variants, sizes, ...defaultProps,});

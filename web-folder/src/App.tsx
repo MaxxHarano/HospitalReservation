@@ -6,7 +6,7 @@ import About from './Pages/About'
 import Contents from './Components/Contents'
 import Home from './Pages/Home'
 import Profile from './Pages/Profile'
-import { Login } from './Pages/Login/Login'
+import Login  from './Pages/Login/Login'
 import Records from './Components/Records'
 // import { Redirect } from 'react-router-dom'
 // <Redirect from = "/reserve" to index/>
