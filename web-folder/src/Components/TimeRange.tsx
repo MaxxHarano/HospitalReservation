@@ -1,5 +1,5 @@
 import { Box, Button, Container, Divider, HStack, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Tag, useRadio, useRadioGroup } from '@chakra-ui/react'
-import { useContext, useId, useState } from 'react'
+import { useContext, useId, useRef } from 'react'
 import { ReserveContext, reserveObject } from './reserveContext.ts'
 import axios from 'axios'
 // import { json } from 'react-router-dom'
@@ -40,25 +40,29 @@ function RadioCard(props) {
 
 // Step 2: Use the `useRadioGroup` hook to control a group of custom radios.
 export default function TimeRange() {
-  const options = ['9:00', '10:00', '13:00', '14:00', '15:00']
   const reservation = useContext(ReserveContext);
-  const [time, setTime] = useState('13:00')
+  const options = ['10:00', '11:00', '13:00', '14:00', '15:00', '16:00']
+  const dateUTC = new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit", hour12: false })
+  const timeArray = options.filter((t)=>t>dateUTC);
+  const time = useRef('13:00')
+
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'framework',
     defaultValue: 'react',
-    onChange: setTime,
   })
 
   const group = getRootProps()
   reservation.id = useId();
+  reservation.timeRange = convertTimeToUTCDate(time.current)
 
   return (
     <Container p={10} m={5}>
       <Tag size={'lg'} colorScheme={'twitter'}> Choose time range you'd like to reserve:</Tag>
       <Divider/>
       <HStack {...group}>
-        {options.map((value) => {
+        {timeArray.map((value) => {
         const radio = getRadioProps({ value })
+        time.current = value;
         return (
             <RadioCard key={value} {...radio}>
               {value}
@@ -70,7 +74,6 @@ export default function TimeRange() {
     </Container>
   )
 
-  reservation.timeRange = time;
 }
 
 const SubmitPopover= ({reserveObj}:{reserveObj:reserveObject})=>{
@@ -109,6 +112,8 @@ function makeReservation(obj:reserveObject){
 
   const Record = (JSON.stringify(reserveObj));
 
+  console.log(Record);
+
   axios.post('http://localhost:8080/api/rpc', {
     "jsonrpc": '2.0',
     "method": 'create_reservation',
@@ -122,3 +127,20 @@ function makeReservation(obj:reserveObject){
     console.log(error);
   });
 }
+
+function convertTimeToUTCDate(time: string): string {
+  // Split the input time string into hour and minute components
+  const [hour, minute] = time.split(":").map(Number);
+  
+  // Get the current date in UTC
+  const currentDate = new Date();
+  
+  // Set the UTC hours and minutes
+  currentDate.setUTCHours(hour);
+  currentDate.setUTCMinutes(minute);
+  currentDate.setUTCSeconds(0);
+  currentDate.setUTCMilliseconds(0);
+
+  return currentDate.toUTCString();
+}
+

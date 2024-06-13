@@ -21,6 +21,7 @@ export default function
 Doct({docList}:{docList:Doctors[]}) {
     const [showTime, setShowTime]=useState(false);
     const [doctName, setdoctName]=useState('default')
+    const [dep, setDep] = useState('default')
     const listItems = docList.map(doct =>
     <ChakraProvider theme={theme} key={doct.id}>
             <Card  border='2px' borderColor='blue' >
@@ -29,14 +30,16 @@ Doct({docList}:{docList:Doctors[]}) {
                 <Heading size='md'> {doct.name}</Heading>
             </CardHeader>
             <CardBody>
-                <p>
-                    {'Department:'+ doct.Department.name}
-                </p>
+                {'Department:'+ doct.Department.name
+                }
             </CardBody>
             <CardFooter>
                 <Button m={2} p={1} colorScheme='gray'>on {doct.name}</Button>
-                <Button onClick={()=>{setShowTime(!showTime);setdoctName(doct.name)}} m={2} >Reserve</Button>
-                
+                <Button onClick={()=>{
+                    setShowTime(!showTime);
+                    setdoctName(doct.name);
+                    setDep(doct.Department.id)
+                    }} m={2} >Reserve</Button>
             </CardFooter>
             </Card>
     </ChakraProvider>
@@ -44,8 +47,9 @@ Doct({docList}:{docList:Doctors[]}) {
 
     const reservation = useContext<reserveObject>(ReserveContext)
     reservation.doctor = doctName;
+    reservation.department = dep;
 
-  return (
+    return (
     <ReserveContext.Provider value={reservation}>
         <SimpleGrid spacing={2} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
             {listItems}
