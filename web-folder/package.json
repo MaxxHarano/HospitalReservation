@@ -20,6 +20,7 @@
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "framer-motion": "^11.0.20",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.363.0",
     "mdb-react-ui-kit": "^8.0.0",
     "react": "^18.2.0",
@@ -28,6 +29,7 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

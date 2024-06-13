@@ -11,7 +11,6 @@ type Doctors = {
     Department: {
         id: string
         name: string
-        detailURL: string
     }
     thumbnailURL: string
     profileURL: string
@@ -38,7 +37,7 @@ Doct({docList}:{docList:Doctors[]}) {
                 <Button onClick={()=>{
                     setShowTime(!showTime);
                     setdoctName(doct.name);
-                    setDep(doct.Department.id)
+                    setDep(doct.Department.name)
                     }} m={2} >Reserve</Button>
             </CardFooter>
             </Card>

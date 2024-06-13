@@ -13,8 +13,7 @@ import {reserveObject} from './reserveContext.ts'
 import { SearchIcon } from '@chakra-ui/icons'
 import { useEffect, useState } from 'react'
 import api from '../api/records'
-
-
+import Cookies from 'js-cookie';
   
 export default function Records() {
 
@@ -23,7 +22,12 @@ export default function Records() {
     useEffect(() => {
       const fetchPosts = async () => {
         try {
-          const response = await api.get('/api/rpc');
+          const cookieValue = Cookies.get('loginCookie');
+          const response = await api.get('/api/rpc',{
+            headers: {
+              'Content-Type': 'application/json',
+              'Cookie': `loginCookie=${cookieValue}`
+          }});
           setRecords(response.data);
         } catch (err) {
           if (err.response) {

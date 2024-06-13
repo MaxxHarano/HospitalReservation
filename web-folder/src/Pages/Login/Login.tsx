@@ -18,18 +18,19 @@ import { OAuthButtonGroup } from './OAuthButtonGroup'
 import { PasswordField } from './PasswordField'
 import { useState } from 'react';
 import api from '../../api/records'
+import Cookies from 'js-cookie';
 
 interface UserRequest {
-    usr: string,
-    pwd: string,
+    acc: string;
+    pwd: string;
     }
 
 export default function Login() {
-  const [account, setAccount] = useState('');
-  const [password, setPassword] = useState('') ;
+  const [account, setAccount] = useState('d');
+  const [password, setPassword] = useState('d') ;
   
   const usr:UserRequest = {
-    usr: account,
+    acc: account,
     pwd: password,
   }
 
@@ -85,10 +86,21 @@ export default function Login() {
 }
 
 
-
 function handleSignIn(usr:UserRequest){
-    api.post('/api/login', usr)
+
+  const u = JSON.stringify(usr)
+
+    api.post('/api/login', {
+      u,
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(u => {
+      console.log(u);
+      Cookies.set('loginCookie', 'default.Cookie.Value', { expires: 0.5, path: '/api/login' }); // Expires in 12 hours
+    })
     .then(res => console.log(res))
     .catch(err => console.error(err))
-    
+
 }

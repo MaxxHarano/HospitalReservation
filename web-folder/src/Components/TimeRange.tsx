@@ -2,7 +2,7 @@ import { Box, Button, Container, Divider, HStack, Popover, PopoverArrow, Popover
 import { useContext, useId, useRef } from 'react'
 import { ReserveContext, reserveObject } from './reserveContext.ts'
 import axios from 'axios'
-// import { json } from 'react-router-dom'
+import Cookies from 'js-cookie';
 // import { ChangeEvent, ReactNode } from 'react';
 
 // 1. Create a component that consumes the `useRadio` hook
@@ -97,28 +97,32 @@ const SubmitPopover= ({reserveObj}:{reserveObj:reserveObject})=>{
 }
 
 function makeReservation(obj:reserveObject){
-  const reserveObj:reserveObject = {
-    id: "string",
+  const reserveObj = {
     department: "string",
     doctor: "string",
     timeRange: "string",
   };
 
-  reserveObj.id = obj.id;
   reserveObj.department = obj.department;
   reserveObj.doctor = obj.doctor;
   reserveObj.timeRange = obj.timeRange;
 
 
   const Record = (JSON.stringify(reserveObj));
+  const cookieValue = Cookies.get('loginCookie');
 
   console.log(Record);
 
   axios.post('http://localhost:8080/api/rpc', {
     "jsonrpc": '2.0',
     "method": 'create_reservation',
-    "id": 7474,
+    "id": 111,
     "params": Record,
+  },{
+    headers: {
+      'Content-Type': 'application/json',
+      'Cookie': `loginCookie=${cookieValue}`
+    }
   })
   .then(function (response) {
     console.log(response);
