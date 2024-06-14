@@ -2,6 +2,8 @@
 /// - `create_...`
 /// - `get_...`
 ///
+/// params in the function signature are body of "params" in JSON-RPC body
+///
 /// NOTE: Make sure to import the Ctx, ModelManager, ... in the model that uses this macro.
 #[macro_export]
 macro_rules! generate_common_rpc_fns {

@@ -3,6 +3,7 @@
 pub type Result<T> = core::result::Result<T, Error>;
 pub type Error = Box<dyn std::error::Error>; // For examples.
 
+use lib_core::model::reservation;
 use serde_json::{json, Value};
 
 #[tokio::main]
@@ -20,6 +21,42 @@ async fn main() -> Result<()> {
 		}),
 	);
 	req_login.await?.print().await?;
+
+	// -- Create Reservation
+	let req_create_reservation = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "create_reservation",
+			"params": {
+				"data": {
+					"user_name": "fuckyou",
+					"department": "heart",
+					"doctor": "detcher",
+					"time_range":"Thu, 13 Jun 2024 16:00:00 GMT"
+				}
+			}
+		}),
+	);
+	let result = req_create_reservation.await?;
+	result.print().await?;
+	let reservation_id = result.json_value::<i64>("/result/data/id")?;
+
+	// -- Get Reservation
+	let req_get_reservation = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "get_reservation",
+			"params": {
+					"id": reservation_id,
+			}
+		}),
+	);
+	let result = req_get_reservation.await?;
+	result.print().await?;
 
 	// -- Create Agent
 	let req_create_agent = hc.do_post(

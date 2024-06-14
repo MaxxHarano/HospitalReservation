@@ -28,7 +28,10 @@ pub mod agent;
 pub mod conv;
 pub mod conv_msg;
 pub mod conv_user;
+pub mod department;
+pub mod doctor;
 pub mod modql_utils;
+pub mod reservation;
 pub mod user;
 
 pub use self::error::{Error, Result};

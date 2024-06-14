@@ -65,7 +65,7 @@ async fn api_login_handler(
 	// Create the success body.
 	let body = Json(json!({
 		"result": {
-			"success": true
+			"logged_in": true
 		}
 	}));
 
