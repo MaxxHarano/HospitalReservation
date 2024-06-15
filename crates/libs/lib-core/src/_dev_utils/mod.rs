@@ -46,12 +46,18 @@ pub async fn seed_users(
 	ctx: &Ctx,
 	mm: &ModelManager,
 	usernames: &[&str],
+	phones: &[&str],
+	id_cards: &[&str],
 ) -> model::Result<Vec<i64>> {
 	let mut ids = Vec::new();
 
 	for name in usernames {
-		let id = seed_user(ctx, mm, name).await?;
-		ids.push(id);
+		for phone in phones {
+			for id_card in id_cards {
+				let id = seed_user(ctx, mm, name, phone, id_card).await?;
+				ids.push(id);
+			}
+		}
 	}
 
 	Ok(ids)
@@ -61,6 +67,8 @@ pub async fn seed_user(
 	ctx: &Ctx,
 	mm: &ModelManager,
 	username: &str,
+	phone: &str,
+	id_card: &str,
 ) -> model::Result<i64> {
 	let pwd_clear = "seed-user-pwd";
 
@@ -70,6 +78,8 @@ pub async fn seed_user(
 		model::user::UserForCreate {
 			username: username.to_string(),
 			pwd_clear: pwd_clear.to_string(),
+			phone: phone.to_string(),
+			id_card: id_card.to_string(),
 		},
 	)
 	.await?;

@@ -31,19 +31,25 @@ impl From<UserTyp> for sea_query::Value {
 #[derive(Clone, Fields, FromRow, Debug, Serialize)]
 pub struct User {
 	pub id: i64,
-	pub username: String,
+	pub username: String,	// same as 'account'
 	pub typ: UserTyp,
+	pub phone: String,
+	pub id_card: String,
 }
 
 #[derive(Deserialize)]
 pub struct UserForCreate {
 	pub username: String,
 	pub pwd_clear: String,
+	pub phone: String,
+	pub id_card: String,
 }
 
 #[derive(Fields)]
 pub struct UserForInsert {
 	pub username: String,
+	pub phone: String,
+	pub id_card: String,
 }
 
 #[derive(Clone, FromRow, Fields, Debug)]
@@ -116,11 +122,15 @@ impl UserBmc {
 		let UserForCreate {
 			username,
 			pwd_clear,
+			phone,
+			id_card,
 		} = user_c;
 
 		// -- Create the user row
 		let user_fi = UserForInsert {
 			username: username.to_string(),
+			phone: phone.to_string(),
+			id_card: id_card.to_string(),
 		};
 
 		// Start the transaction
@@ -259,6 +269,8 @@ mod tests {
 		let ctx = Ctx::root_ctx();
 		let fx_username = "test_create_ok-user-01";
 		let fx_pwd_clear = "test_create_ok pwd 01";
+		let fx_phone = "19123456672";
+		let fx_id_card = "410221233456789009";
 
 		// -- Exec
 		let user_id = UserBmc::create(
@@ -267,6 +279,8 @@ mod tests {
 			UserForCreate {
 				username: fx_username.to_string(),
 				pwd_clear: fx_pwd_clear.to_string(),
+				phone: fx_phone.to_string(),
+				id_card: fx_id_card.to_string(),
 			},
 		)
 		.await?;

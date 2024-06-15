@@ -1,12 +1,12 @@
 -- root user (at id = 0)
 INSERT INTO "user" 
-    (id,  typ, username, cid, ctime, mid, mtime) VALUES 
-    (0, 'Sys', 'root',  0,   now(), 0,   now());
+    (id,  typ, username, phone, id_card, cid, ctime, mid, mtime) VALUES 
+    (0, 'Sys', 'root',  93219312,  410222123123123,  0,   now(), 0,   now());
 
 -- User demo1
 INSERT INTO "user" 
-    (username, cid, ctime, mid, mtime) VALUES 
-    ('demo1',  0,   now(), 0,   now());
+    (username, phone, id_card, cid, ctime, mid, mtime) VALUES 
+    ('demo1',  29137129312,  4102213241431234,  0,   now(), 0,   now());
 
 -- Agent mock-01 (with 'parrot' model) (id: 100)
 INSERT INTO "agent"    

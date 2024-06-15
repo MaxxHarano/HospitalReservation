@@ -1,4 +1,5 @@
 use crate::rpcs::prelude::*;
+use futures::future::join_all;
 use lib_core::model::{
 	department::{DepartmentBmc, DepartmentFilter},
 	doctor::{DoctorBmc, DoctorFilter},
@@ -105,10 +106,19 @@ pub async fn list_reservations(
 	ctx: Ctx,
 	mm: ModelManager,
 	params: ParamsList<ReservationFilter>,
-) -> Result<DataRpcResult<Vec<Reservation>>> {
+) -> Result<DataRpcResult<Vec<QueryedReservation>>> {
 	let entities =
 		ReservationBmc::list(&ctx, &mm, params.filters, params.list_options).await?;
-	Ok(entities.into())
+
+	let queryed_reservations =
+		join_all(entities.into_iter().map(|reservation| async {
+			query_reservation(reservation, &ctx, &mm)
+				.await
+				.expect("One of the reservation's entity not found")
+		}))
+		.await;
+
+	Ok(queryed_reservations.into())
 }
 
 pub async fn delete_reservation(

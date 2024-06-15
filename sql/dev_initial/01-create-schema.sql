@@ -10,6 +10,9 @@ CREATE TABLE "user" (
   username varchar(128) NOT NULL UNIQUE,
   typ user_typ NOT NULL DEFAULT 'User',
 
+  phone varchar(24) NOT NULL UNIQUE,
+  id_card varchar(24) NOT NULL UNIQUE,
+
   -- Auth
   pwd varchar(256),
   pwd_salt uuid NOT NULL DEFAULT gen_random_uuid(),
@@ -172,7 +175,7 @@ CREATE TABLE reservation (
   doctor_id BIGINT NOT NULL,
 
   -- Properties
-  user_name varchar(128) NOT NULL,
+  username varchar(128) NOT NULL,
   time_range timestamp with time zone NOT NULL,
 
   -- Timestamps

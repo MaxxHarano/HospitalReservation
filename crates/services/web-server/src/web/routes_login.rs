@@ -4,7 +4,7 @@ use axum::routing::post;
 use axum::{Json, Router};
 use lib_auth::pwd::{self, ContentToHash, SchemeStatus};
 use lib_core::ctx::Ctx;
-use lib_core::model::user::{UserBmc, UserForLogin};
+use lib_core::model::user::{UserBmc, UserForCreate, UserForLogin};
 use lib_core::model::ModelManager;
 use serde::Deserialize;
 use serde_json::{json, Value};
@@ -15,6 +15,7 @@ pub fn routes(mm: ModelManager) -> Router {
 	Router::new()
 		.route("/api/login", post(api_login_handler))
 		.route("/api/logoff", post(api_logoff_handler))
+		.route("/api/register", post(api_register_handler))
 		.with_state(mm)
 }
 
@@ -106,3 +107,21 @@ struct LogoffPayload {
 	logoff: bool,
 }
 // endregion: --- Logoff
+
+async fn api_register_handler(
+	State(mm): State<ModelManager>,
+	Json(payload): Json<UserForCreate>,
+) -> Result<Json<Value>> {
+	debug!("{:<12} - api_register_handler", "HANDLER");
+
+	let root_ctx = Ctx::root_ctx();
+	let user_id = UserBmc::create(&root_ctx, &mm, payload).await?;
+
+	let body = Json(json!({
+		"result": {
+			"new": user_id
+		}
+	}));
+
+	Ok(body)
+}
