@@ -33,15 +33,23 @@ pub async fn dequery_reservation(
 		doctor: ref doctor_name,
 		..
 	} = data;
-	let doctor_filter: DoctorFilter = serde_json::from_value(json!(
-		{
-			"name": {"$eq": doctor_name},
+
+	let doctor_id = match doctor_name {
+		Some(doctor_name) => {
+			let doctor_filter: DoctorFilter = serde_json::from_value(json!(
+				{
+					"name": {"$eq": doctor_name},
+				}
+			))?;
+			Some(
+				DoctorBmc::first(ctx, mm, Some(vec![doctor_filter]), None)
+					.await?
+					.expect("No doctor id found (there should be one)")
+					.id,
+			)
 		}
-	))?;
-	let doctor_id = DoctorBmc::first(ctx, mm, Some(vec![doctor_filter]), None)
-		.await?
-		.expect("No doctor id found (there should be one)")
-		.id;
+		None => None,
+	};
 
 	let department_filter: DepartmentFilter = serde_json::from_value(json!(
 		{
@@ -65,7 +73,10 @@ pub async fn query_reservation(
 	// doctor_id     -> doctor
 	// department_id -> department
 	// get
-	let doctor_name = DoctorBmc::get(ctx, mm, data.doctor_id).await?.name;
+	let doctor_name = match data.doctor_id {
+		Some(doctor_id) => Some(DoctorBmc::get(ctx, mm, doctor_id).await?.name),
+		None => None,
+	};
 	let department_name =
 		DepartmentBmc::get(ctx, mm, data.department_id).await?.name;
 

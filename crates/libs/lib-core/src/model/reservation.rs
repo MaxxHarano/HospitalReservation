@@ -24,7 +24,7 @@ pub struct QueryedReservation {
 
 	// -- Relations
 	pub department: String,
-	pub doctor: String,
+	pub doctor: Option<String>,
 
 	// -- Properties
 	pub username: String,
@@ -40,7 +40,7 @@ pub struct Reservation {
 
 	// -- Relations
 	pub department_id: i64,
-	pub doctor_id: i64,
+	pub doctor_id: Option<i64>,
 
 	// -- Properties
 	pub username: String,
@@ -53,7 +53,7 @@ impl Reservation {
 	pub fn to_queryed_reservation(
 		&self,
 		department: String,
-		doctor: String,
+		doctor: Option<String>,
 	) -> QueryedReservation {
 		QueryedReservation {
 			id: self.id,
@@ -69,7 +69,7 @@ impl Reservation {
 #[derive(Debug, Clone, Deserialize, Fields)]
 pub struct QueryedReservationForCreate {
 	pub department: String,
-	pub doctor: String,
+	pub doctor: Option<String>,
 
 	pub username: String,
 	#[serde_as(as = "Rfc2822")]
@@ -80,7 +80,7 @@ impl QueryedReservationForCreate {
 	pub fn to_reservation4create(
 		&self,
 		department_id: i64,
-		doctor_id: i64,
+		doctor_id: Option<i64>,
 	) -> ReservationForCreate {
 		ReservationForCreate {
 			department_id,
@@ -95,7 +95,7 @@ impl QueryedReservationForCreate {
 #[derive(Debug, Clone, Deserialize, Fields)]
 pub struct ReservationForCreate {
 	pub department_id: i64,
-	pub doctor_id: i64,
+	pub doctor_id: Option<i64>,
 	pub username: String,
 	#[serde_as(as = "Rfc2822")]
 	pub time_range: OffsetDateTime,

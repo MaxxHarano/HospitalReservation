@@ -164,6 +164,7 @@ ALTER TABLE doctor ADD CONSTRAINT fk_doctor_department
   FOREIGN KEY (department_id) REFERENCES "department"(id)
   ON DELETE CASCADE;
 
+CREATE INDEX idx_doctor_department_id ON doctor (department_id);
 
 -- Reservation
 CREATE TABLE reservation (
@@ -172,7 +173,7 @@ CREATE TABLE reservation (
 
   -- FKs
   department_id BIGINT NOT NULL,
-  doctor_id BIGINT NOT NULL,
+  doctor_id BIGINT,
 
   -- Properties
   username varchar(128) NOT NULL,
@@ -192,3 +193,6 @@ ALTER TABLE reservation ADD CONSTRAINT fk_reservation_department
 ALTER TABLE reservation ADD CONSTRAINT fk_reservation_doctor
   FOREIGN KEY (doctor_id) REFERENCES "doctor"(id)
   ON DELETE CASCADE;
+
+CREATE INDEX idx_reservation_department_id ON reservation (department_id);
+CREATE INDEX idx_reservation_doctor_id ON reservation (doctor_id);

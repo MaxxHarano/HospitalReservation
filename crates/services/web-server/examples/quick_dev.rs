@@ -33,97 +33,97 @@ async fn main() -> Result<()> {
 	);
 	req_login.await?.print().await?;
 
-	// // -- Create Reservation
-	// let req_create_reservation = hc.do_post(
-	// 	"/api/rpc",
-	// 	json!({
-	// 		"jsonrpc": "2.0",
-	// 		"id": 1,
-	// 		"method": "create_reservation",
-	// 		"params": {
-	// 			"data": {
-	// 				"username": "fuckyou",
-	// 				"department": "heart",
-	// 				"doctor": "detcher",
-	// 				"time_range":"Thu, 13 Jun 2024 16:00:00 GMT"
-	// 			}
-	// 		}
-	// 	}),
-	// );
-	// let result = req_create_reservation.await?;
-	// result.print().await?;
-	// let reservation_id = result.json_value::<i64>("/result/data/id")?;
+	// -- Create Reservation
+	let req_create_reservation = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "create_reservation",
+			"params": {
+				"data": {
+					"username": "fuckyou",
+					"department": "heart",
+					// "doctor": "detcher",
+					"time_range":"Thu, 13 Jun 2024 16:00:00 GMT"
+				}
+			}
+		}),
+	);
+	let result = req_create_reservation.await?;
+	result.print().await?;
+	let reservation_id = result.json_value::<i64>("/result/data/id")?;
 
-	// // -- Get Reservation
-	// let req_get_reservation = hc.do_post(
-	// 	"/api/rpc",
-	// 	json!({
-	// 		"jsonrpc": "2.0",
-	// 		"id": 1,
-	// 		"method": "get_reservation",
-	// 		"params": {
-	// 				"id": reservation_id,
-	// 		}
-	// 	}),
-	// );
-	// let result = req_get_reservation.await?;
-	// result.print().await?;
+	// -- Get Reservation
+	let req_get_reservation = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "get_reservation",
+			"params": {
+					"id": reservation_id,
+			}
+		}),
+	);
+	let result = req_get_reservation.await?;
+	result.print().await?;
 
-	// // -- Create Reservation again
-	// let req_create_reservation = hc.do_post(
-	// 	"/api/rpc",
-	// 	json!({
-	// 		"jsonrpc": "2.0",
-	// 		"id": 1,
-	// 		"method": "create_reservation",
-	// 		"params": {
-	// 			"data": {
-	// 				"username": "kunijiwa",
-	// 				"department": "heart",
-	// 				"doctor": "detcher",
-	// 				"time_range":"Thu, 13 Jun 2024 18:00:00 GMT"
-	// 			}
-	// 		}
-	// 	}),
-	// );
-	// let result = req_create_reservation.await?;
-	// result.print().await?;
-	// let reservation_id = result.json_value::<i64>("/result/data/id")?;
+	// -- Create Reservation again
+	let req_create_reservation = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "create_reservation",
+			"params": {
+				"data": {
+					"username": "kunijiwa",
+					"department": "heart",
+					"doctor": "detcher",
+					"time_range":"Thu, 13 Jun 2024 18:00:00 GMT"
+				}
+			}
+		}),
+	);
+	let result = req_create_reservation.await?;
+	result.print().await?;
+	let reservation_id = result.json_value::<i64>("/result/data/id")?;
 
-	// // -- Get Reservation again
-	// let req_get_reservation = hc.do_post(
-	// 	"/api/rpc",
-	// 	json!({
-	// 		"jsonrpc": "2.0",
-	// 		"id": 1,
-	// 		"method": "get_reservation",
-	// 		"params": {
-	// 				"id": reservation_id,
-	// 		}
-	// 	}),
-	// );
-	// let result = req_get_reservation.await?;
-	// result.print().await?;
+	// -- Get Reservation again
+	let req_get_reservation = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "get_reservation",
+			"params": {
+					"id": reservation_id,
+			}
+		}),
+	);
+	let result = req_get_reservation.await?;
+	result.print().await?;
 
-	// // -- List Reservations
-	// let req_list_reservations = hc.do_post(
-	// 	"/api/rpc",
-	// 	json!({
-	// 		"jsonrpc": "2.0",
-	// 		"id": 1,
-	// 		"method": "list_reservations",
-	// 		"params": {
-	// 				"filters": {
-	// 					"id": {"$gt": 1},
-	// 				},
-	// 				"list_options": {
+	// -- List Reservations
+	let req_list_reservations = hc.do_post(
+		"/api/rpc",
+		json!({
+			"jsonrpc": "2.0",
+			"id": 1,
+			"method": "list_reservations",
+			"params": {
+					"filters": {
+						"id": {"$gt": 1},
+					},
+					"list_options": {
 
-	// 				},
-	// 		}
-	// 	}),
-	// );
-	// let result = req_list_reservations.await?;
-	// result.print().await?;
+					},
+			}
+		}),
+	);
+	let result = req_list_reservations.await?;
+	result.print().await?;
 
 	// // -- Create Agent
 	// let req_create_agent = hc.do_post(
