@@ -7,6 +7,7 @@ use lib_core::model::{
 		QueryedReservation, QueryedReservationForCreate, Reservation,
 		ReservationBmc, ReservationFilter, ReservationForCreate,
 	},
+	user::{User, UserBmc},
 };
 use serde_json::json;
 
@@ -19,21 +20,23 @@ pub fn rpc_router_builder() -> RouterBuilder {
 	)
 }
 
+// doctor     -> doctor_id
+// department -> department_id
+// username	  -> user_id
+// Bmc::first() | As long as 'doctor'/'department' can map to a unique id,
+// the correctness of using 'first' is upheld.
 pub async fn dequery_reservation(
 	data: QueryedReservationForCreate,
 	ctx: &Ctx,
 	mm: &ModelManager,
 ) -> Result<ReservationForCreate> {
-	// doctor     -> doctor_id
-	// department -> department_id
-	// first | As long as 'doctor'/'department' can map to a unique id,
-	// the correctness of using 'first' is upheld.
 	let QueryedReservationForCreate {
 		department: ref department_name,
 		doctor: ref doctor_name,
+		username: ref user_name,
 		..
 	} = data;
-
+	// -- Doctor
 	let doctor_id = match doctor_name {
 		Some(doctor_name) => {
 			let doctor_filter: DoctorFilter = serde_json::from_value(json!(
@@ -50,7 +53,7 @@ pub async fn dequery_reservation(
 		}
 		None => None,
 	};
-
+	// -- Department
 	let department_filter: DepartmentFilter = serde_json::from_value(json!(
 		{
 			"name": {"$eq": department_name},
@@ -61,26 +64,35 @@ pub async fn dequery_reservation(
 			.await?
 			.expect("No department id found (there should be one)")
 			.id;
+	// -- user
+	let user: User = UserBmc::first_by_username(ctx, mm, user_name)
+		.await?
+		.unwrap();
 
-	Ok(data.to_reservation4create(department_id, doctor_id))
+	Ok(data.to_reservation4create(department_id, doctor_id, user.id))
 }
 
+// doctor_id     -> doctor
+// department_id -> department
+// user_id		 -> username
+// Bmc::get()
 pub async fn query_reservation(
 	data: Reservation,
 	ctx: &Ctx,
 	mm: &ModelManager,
 ) -> Result<QueryedReservation> {
-	// doctor_id     -> doctor
-	// department_id -> department
-	// get
+	// -- Doctor
 	let doctor_name = match data.doctor_id {
 		Some(doctor_id) => Some(DoctorBmc::get(ctx, mm, doctor_id).await?.name),
 		None => None,
 	};
+	// -- Department
 	let department_name =
 		DepartmentBmc::get(ctx, mm, data.department_id).await?.name;
+	// -- User
+	let user: User = UserBmc::get(ctx, mm, data.user_id).await?;
 
-	Ok(data.to_queryed_reservation(department_name, doctor_name))
+	Ok(data.to_queryed_reservation(department_name, doctor_name, user.username))
 }
 
 pub async fn create_reservation(

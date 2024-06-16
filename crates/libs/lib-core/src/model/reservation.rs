@@ -7,7 +7,7 @@ use crate::model::Result;
 use lib_utils::time::Rfc2822;
 use modql::{
 	field::Fields,
-	filter::{FilterNodes, ListOptions, OpValsInt64, OpValsString, OpValsValue},
+	filter::{FilterNodes, ListOptions, OpValsInt64, OpValsValue},
 };
 use serde::{Deserialize, Serialize};
 use serde_with::serde_as;
@@ -43,7 +43,7 @@ pub struct Reservation {
 	pub doctor_id: Option<i64>,
 
 	// -- Properties
-	pub username: String,
+	pub user_id: i64,
 
 	#[serde_as(as = "Rfc2822")]
 	pub time_range: OffsetDateTime,
@@ -54,12 +54,13 @@ impl Reservation {
 		&self,
 		department: String,
 		doctor: Option<String>,
+		username: String
 	) -> QueryedReservation {
 		QueryedReservation {
 			id: self.id,
 			department,
 			doctor,
-			username: self.username.clone(),
+			username,
 			time_range: self.time_range,
 		}
 	}
@@ -81,11 +82,12 @@ impl QueryedReservationForCreate {
 		&self,
 		department_id: i64,
 		doctor_id: Option<i64>,
+		user_id: i64
 	) -> ReservationForCreate {
 		ReservationForCreate {
 			department_id,
 			doctor_id,
-			username: self.username.clone(),
+			user_id,
 			time_range: self.time_range,
 		}
 	}
@@ -96,11 +98,12 @@ impl QueryedReservationForCreate {
 pub struct ReservationForCreate {
 	pub department_id: i64,
 	pub doctor_id: Option<i64>,
-	pub username: String,
+	pub user_id: i64,
 	#[serde_as(as = "Rfc2822")]
 	pub time_range: OffsetDateTime,
 }
 
+/// TODO
 #[serde_as]
 #[derive(Debug, Clone, Fields, Deserialize)]
 pub struct ReservationForUpdate {
@@ -117,7 +120,7 @@ pub struct ReservationFilter {
 	pub id: Option<OpValsInt64>,
 	pub department_id: Option<OpValsInt64>,
 	pub doctor_id: Option<OpValsInt64>,
-	pub username: Option<OpValsString>,
+	pub user_id: Option<OpValsInt64>,
 
 	#[modql(to_sea_value_fn = "time_to_sea_value")]
 	pub time_range: Option<OpValsValue>,

@@ -15,7 +15,7 @@ async fn main() -> Result<()> {
 	let req_register = hc.do_post(
 		"/api/register",
 		json!({
-			"username": "Detcher",
+			"username": "live",
 			"pwd_clear": "fuckyou",
 			"phone": "19123456672",
 			"id_card": "410221233456789009"
@@ -27,7 +27,7 @@ async fn main() -> Result<()> {
 	let req_login = hc.do_post(
 		"/api/login",
 		json!({
-			"username": "Detcher",
+			"username": "live",
 			"pwd": "fuckyou"
 		}),
 	);
@@ -42,7 +42,7 @@ async fn main() -> Result<()> {
 			"method": "create_reservation",
 			"params": {
 				"data": {
-					"username": "fuckyou",
+					"username": "live",
 					"department": "heart",
 					// "doctor": "detcher",
 					"time_range":"Thu, 13 Jun 2024 16:00:00 GMT"
@@ -78,7 +78,7 @@ async fn main() -> Result<()> {
 			"method": "create_reservation",
 			"params": {
 				"data": {
-					"username": "kunijiwa",
+					"username": "live",
 					"department": "heart",
 					"doctor": "detcher",
 					"time_range":"Thu, 13 Jun 2024 18:00:00 GMT"

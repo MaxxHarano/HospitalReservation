@@ -174,9 +174,9 @@ CREATE TABLE reservation (
   -- FKs
   department_id BIGINT NOT NULL,
   doctor_id BIGINT,
+  user_id BIGINT NOT NULL,
 
   -- Properties
-  username varchar(128) NOT NULL,
   time_range timestamp with time zone NOT NULL,
 
   -- Timestamps
@@ -194,5 +194,10 @@ ALTER TABLE reservation ADD CONSTRAINT fk_reservation_doctor
   FOREIGN KEY (doctor_id) REFERENCES "doctor"(id)
   ON DELETE CASCADE;
 
+ALTER TABLE reservation ADD CONSTRAINT fk_reservation_user
+  FOREIGN KEY (user_id) REFERENCES "user"(id)
+  ON DELETE CASCADE;
+
 CREATE INDEX idx_reservation_department_id ON reservation (department_id);
 CREATE INDEX idx_reservation_doctor_id ON reservation (doctor_id);
+CREATE INDEX idx_reservation_user_id ON reservation (user_id);
