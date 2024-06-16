@@ -15,9 +15,32 @@ INSERT INTO "agent"
 
 INSERT INTO "department"
     (id, name, cid, ctime, mid, mtime) VALUES
-    (2, 'heart', 0, now(), 0, now());
+    (1, 'cardiovacular', 0, now(), 0, now());
+
+INSERT INTO "department"
+    (id, name, cid, ctime, mid, mtime) VALUES
+    (2, 'respiratory', 0, now(), 0, now());
+
+INSERT INTO "department"
+    (id, name, cid, ctime, mid, mtime) VALUES
+    (3, 'neural', 0, now(), 0, now());
 
 INSERT INTO "doctor"
     (id, department_id, name, title, thumbnail_url, profile, cid, ctime, mid, mtime) VALUES
-    (5, 2, 'detcher', 'Basic', 'https://pornhub.cn', 'a handsome guy', 0, now(), 0, now());
+    (1, 1, 'Dr. A', 'Specialist', 'https://pornhubA.cn', 'a handsome guy', 0, now(), 0, now());
 
+INSERT INTO "doctor"
+    (id, department_id, name, title, thumbnail_url, profile, cid, ctime, mid, mtime) VALUES
+    (2, 1, 'Dr. B', 'Specialist', 'https://pornhubB.cn', 'a handsome guy', 0, now(), 0, now());
+
+INSERT INTO "doctor"
+    (id, department_id, name, title, thumbnail_url, profile, cid, ctime, mid, mtime) VALUES
+    (3, 2, 'Dr. C', 'Specialist', 'https://pornhubC.cn', 'a handsome guy', 0, now(), 0, now());
+
+INSERT INTO "doctor"
+    (id, department_id, name, title, thumbnail_url, profile, cid, ctime, mid, mtime) VALUES
+    (4, 2, 'Dr. D', 'Specialist', 'https://pornhubD.cn', 'a handsome guy', 0, now(), 0, now());
+
+INSERT INTO "doctor"
+    (id, department_id, name, title, thumbnail_url, profile, cid, ctime, mid, mtime) VALUES
+    (5, 3, 'Dr. E', 'Specialist', 'https://pornhubE.cn', 'a handsome guy', 0, now(), 0, now());

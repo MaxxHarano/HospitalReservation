@@ -21,10 +21,12 @@ TopNav() {
                 <Bell/>
             </Button>
             <Button variant="ghost">
+            <Link to='/Profile'>
                 <User/>
+            </Link>
             </Button>
             <Button variant="ghost">
-                <Link to='login'>
+                <Link to='/login'>
                 <Settings/>
                 </Link>
             </Button>

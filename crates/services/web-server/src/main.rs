@@ -6,19 +6,23 @@ mod log;
 mod web;
 
 pub use self::error::{Error, Result};
+use axum::http::Method;
 use config::web_config;
 
 use crate::web::mw_auth::{mw_ctx_require, mw_ctx_resolver};
 use crate::web::mw_req_stamp::mw_req_stamp_resolver;
 use crate::web::mw_res_map::mw_reponse_map;
 use crate::web::{routes_login, routes_static};
-use axum::{middleware, Router};
+use axum::{http, middleware, Router};
 use lib_core::_dev_utils;
 use lib_core::model::ModelManager;
 use tokio::net::TcpListener;
 use tower_cookies::CookieManagerLayer;
 use tracing::info;
 use tracing_subscriber::EnvFilter;
+use tower_http::cors:: CorsLayer;
+use http::HeaderValue;
+use http::header::{AUTHORIZATION, ACCEPT, CONTENT_TYPE};
 
 // endregion: --- Modules
 
@@ -46,6 +50,10 @@ async fn main() -> Result<()> {
 		.layer(middleware::from_fn_with_state(mm.clone(), mw_ctx_resolver))
 		.layer(CookieManagerLayer::new())
 		.layer(middleware::from_fn(mw_req_stamp_resolver))
+		.layer(CorsLayer::new().allow_methods([Method::GET, Method::POST, Method::DELETE])
+								.allow_origin("http://localhost:5173".parse::<HeaderValue>().unwrap())
+								.allow_headers([AUTHORIZATION, ACCEPT, CONTENT_TYPE])
+								.allow_credentials(true))
 		.fallback_service(routes_static::serve_dir());
 
 	// region:    --- Start Server
