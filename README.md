@@ -1,3 +1,14 @@
+- Powered by https://rust10x.com/
+
+- A demo of Hospital-Appointment-System 
+
+- No doctor arrangement :(
+
+- See `API_Doc.md` for more details
+
+- ***BUGGY***
+
+---
 # Rust10x Web App Blueprint for Production Coding
 
 More info at: https://rust10x.com/web-app
